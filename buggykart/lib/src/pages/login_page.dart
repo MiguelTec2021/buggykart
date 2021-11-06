@@ -1,3 +1,4 @@
+import 'package:buggykart/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
 
             FlatButton(
               onPressed:(){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()));
               },
               color: Colors.red,
               shape: const StadiumBorder(),
