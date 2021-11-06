@@ -1,3 +1,4 @@
+import 'package:buggykart/src/pages/news_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   int _pagina = 0;
   final List<Widget> _paginas = [
-  
+    const NewsPage(),
   ];
 
   @override
