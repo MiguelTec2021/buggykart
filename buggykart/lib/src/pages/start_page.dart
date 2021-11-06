@@ -1,3 +1,4 @@
+import 'package:buggykart/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -37,7 +38,7 @@ class _StartPageState extends State<StartPage> {
             const SizedBox(height: 60.0,),
             ElevatedButton(
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>StartPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
               },
               child: const Text("Empezar",style: TextStyle(color: Colors.white, fontSize: 20.0)),
               style: ElevatedButton.styleFrom(
