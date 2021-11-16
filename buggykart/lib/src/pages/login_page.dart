@@ -1,4 +1,4 @@
-import 'package:buggykart/src/pages/home_page.dart';
+// import 'package:buggykart/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,49 +17,63 @@ class _LoginPageState extends State<LoginPage> {
       //   title: Te
       // ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Image(image:  AssetImage('assets/jar-loading.gif'),),
-            const FadeInImage(
-              placeholder:  AssetImage('assets/jar-loading.gif'),
-              fadeInDuration: Duration(milliseconds: 200),
-              image:  AssetImage('assets/logo_j_m.png'),
-              fit: BoxFit.contain,
-              height: 200,
-              width: 200,
-              ),
-              
-            const Text('Iniciar Sesión'),
-            const SizedBox(height: 40.0,),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Usuario',
+        child: ListView(
+          children: [Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image(image:  AssetImage('assets/jar-loading.gif'),),
+              const SizedBox(height: 70.0,),
+              const FadeInImage(
+                placeholder:  AssetImage('assets/jar-loading.gif'),
+                fadeInDuration: Duration(milliseconds: 200),
+                image:  AssetImage('assets/Highway-logo-color.png'),
+                fit: BoxFit.contain,
+                height: 200,
+                width: 200,
+                ),
+              const SizedBox(height: 20,),
+              const Text('Iniciar Sesión', style: TextStyle(fontFamily: 'museoBold', fontSize: 30.0),),
+              const SizedBox(height: 20.0,),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Usuario',
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Constraseña',
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Constraseña',
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 100,),
-
-            FlatButton(
-              onPressed:(){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()));
-              },
-              color: Colors.red,
-              shape: const StadiumBorder(),
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
-              child: const Text('Empezar', style: TextStyle(color:Colors.white),) 
-              ),
-          ],
+              const SizedBox(height: 50,),
+              // FlatButton(
+              //   onPressed:(){
+              //     Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()));
+              //   },
+              //   color: Colors.red,
+              //   shape: const StadiumBorder(),
+              //   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
+              //   child: const Text('Empezar', style: TextStyle(color:Colors.white),) 
+              //   ),
+              ElevatedButton(
+                onPressed: (){
+                  
+                }, 
+                child: const Text('Iniciar sesión', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue[700],
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
+                  
+                )
+                ),
+            ],
+          ),
+          ]
         ),
       ),
     );
