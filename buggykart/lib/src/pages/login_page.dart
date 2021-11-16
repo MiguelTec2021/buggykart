@@ -10,6 +10,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final usuario = TextEditingController();
+  final contrasena = TextEditingController();
+
+  String user = "";
+  String pass = "";
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +44,18 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 20.0,),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: usuario,
+                  decoration: const InputDecoration(
                     hintText: 'Usuario',
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: contrasena,
+                  decoration: const InputDecoration(
                     hintText: 'Constraseña',
                   ),
                 ),
@@ -62,7 +72,36 @@ class _LoginPageState extends State<LoginPage> {
               //   ),
               ElevatedButton(
                 onPressed: (){
-                  
+                  user = usuario.text;
+                  pass = contrasena.text;
+
+                  if (user != '' && pass !="") {
+                    // ingresar(user, pass);
+                  }else{
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('HIGWAY'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: const [
+                                Text('Verifica tus datos'),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            ElevatedButton(
+                              child: const Text('Aceptar',),
+                              onPressed: (){
+                                Navigator.of(context).pop();
+                              },
+                            )
+                          ],
+                        );
+                      });
+                  }
                 }, 
                 child: const Text('Iniciar sesión', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                 style: ElevatedButton.styleFrom(
