@@ -1,5 +1,9 @@
 // import 'package:buggykart/src/pages/home_page.dart';
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +20,56 @@ class _LoginPageState extends State<LoginPage> {
 
   String user = "";
   String pass = "";
+
+  void ingresar(useri, passi)async{
+    try {
+      var url = Uri.parse('http://192.168.56.1/apps/server.php');
+      var response = await http.post(url, body: {
+        'usuario' : useri,
+        'password' :passi,
+        }
+      ).timeout( const Duration(seconds: 60));
+
+
+      var data = jsonDecode(response.body);
+
+      int index =0;
+      print(response.body);
+
+      if (response.body!='0') {
+        Navigator.pushNamed(context, '/home');
+      }else{
+        showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return const AlertDialog(
+            title: Text('HIGHWAY'),
+            content: Text('No existe usuario registrado'),
+          );
+        });
+      }
+    // ignore: unused_catch_clause
+    } on TimeoutException catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return const AlertDialog(
+            title: Text('HIGHWAY'),
+            content: Text('Tardo la conexión, revise su conexión a internet'),
+          );
+        });
+    // ignore: unused_catch_clause
+    }on Error catch (e){
+      showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return const AlertDialog(
+            title: Text('HIGHWAY'),
+            content: Text('Tardo la conexión, revise su conexión a internet'),
+          );
+        });
+    }
+  }
 
 
   @override
@@ -55,6 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: contrasena,
+                  obscureText: true,
                   decoration: const InputDecoration(
                     hintText: 'Constraseña',
                   ),
@@ -76,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                   pass = contrasena.text;
 
                   if (user != '' && pass !="") {
-                    // ingresar(user, pass);
+                    ingresar(user, pass);
                   }else{
                     showDialog(
                       context: context,
@@ -102,6 +157,8 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       });
                   }
+                  usuario.text = "";
+                  contrasena.text ="";
                 }, 
                 child: const Text('Iniciar sesión', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                 style: ElevatedButton.styleFrom(

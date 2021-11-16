@@ -1,3 +1,5 @@
+import 'package:buggykart/src/pages/home_page.dart';
+import 'package:buggykart/src/pages/login_page.dart';
 import 'package:buggykart/src/pages/start_page.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +10,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Buggy Kart',
-      home: StartPage(),
+      title: 'HIGHWAY',
+      // home: StartPage(),
+      initialRoute: '/',
+      routes: {
+        '/'        : (context) => const StartPage(),
+        '/login'   : (context) => const LoginPage(),
+        '/home'    : (context) =>const HomePage(),
+
+      },
     );
   }
 }
