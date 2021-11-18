@@ -18,7 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   String serve = 'http://192.168.56.1/apps/';
   String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
-  // bool lod = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
           children: [Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Image(image:  AssetImage('assets/jar-loading.gif'),),
               const SizedBox(height: 70.0,),
               const FadeInImage(
                 placeholder:  AssetImage('assets/load.gif'),
@@ -87,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ],
                               ),
-                              
                             ),
                             actions: [
                               ElevatedButton(

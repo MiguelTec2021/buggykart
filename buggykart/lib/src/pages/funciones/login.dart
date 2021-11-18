@@ -9,9 +9,6 @@ import 'package:http/http.dart' as http;
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
-
-
-
   void ingresar(context, useri, passi)async{
     try {
       espera(context ,true);
