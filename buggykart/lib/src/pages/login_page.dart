@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'dialogs/espera.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,10 +22,15 @@ class _LoginPageState extends State<LoginPage> {
 
   String user = "";
   String pass = "";
+  String serve = 'http://192.168.56.1/apps/';
+  String serve2 = 'https://proyecttjyw.000webhostapp.com/';
+
+  bool lod = false;
 
   void ingresar(useri, passi)async{
     try {
-      var url = Uri.parse('http://192.168.56.1/apps/server.php');
+      espera(context ,true);
+      var url = Uri.parse('${serve}server.php');
       var response = await http.post(url, body: {
         'usuario' : useri,
         'password' :passi,
@@ -32,12 +39,16 @@ class _LoginPageState extends State<LoginPage> {
 
       var data = jsonDecode(response.body);
 
+      if (response.body !='0') {
+        espera(context,false);
+      }
       int index =0;
-      print(response.body);
+  
 
       if (response.body!='0') {
         Navigator.pushNamed(context, '/home',);
       }else{
+        espera(context, false);
         showDialog(
         context: context,
         builder: (BuildContext context){
@@ -70,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               // Image(image:  AssetImage('assets/jar-loading.gif'),),
               const SizedBox(height: 70.0,),
               const FadeInImage(
-                placeholder:  AssetImage('assets/jar-loading.gif'),
+                placeholder:  AssetImage('assets/load.gif'),
                 fadeInDuration: Duration(milliseconds: 200),
                 image:  AssetImage('assets/Highway-logo-color.png'),
                 fit: BoxFit.contain,
@@ -123,23 +133,36 @@ class _LoginPageState extends State<LoginPage> {
                       context: context,
                       barrierDismissible: false,
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('HIGWAY'),
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: const [
-                                Text('Verifica tus datos'),
-                              ],
+                        return Center(
+                          child: AlertDialog(
+                            title: const Text('HIGWAY'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Center(
+                                    child: Column(
+                                      children: const [
+                                        Text('Debes llenar todos los campos'),
+                                        Icon(Icons.assignment_late_rounded, color: Colors.amber, size: 100,)
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              
                             ),
+                            actions: [
+                              ElevatedButton(
+                                child: const Text('Aceptar',),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue[700],
+                                ),
+                                onPressed: (){
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
                           ),
-                          actions: [
-                            ElevatedButton(
-                              child: const Text('Aceptar',),
-                              onPressed: (){
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
                         );
                       });
                   }
@@ -156,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                 InkWell(
                   child:const  Text('No tienes cuenta'),
                   onTap: (){
-                    
+
                   },
                 )
             ],

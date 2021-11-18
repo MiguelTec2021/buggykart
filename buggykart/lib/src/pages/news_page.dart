@@ -77,8 +77,8 @@ class _NewsPageState extends State<NewsPage> {
             //   )
             // ),
             Expanded(
-              child: loading == true ? Center(
-                child: Container(width: 30, height: 30, child: CircularProgressIndicator(),),
+              child: loading == true ? const Center(
+                child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(),),
               ): ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index){
@@ -98,7 +98,7 @@ class _NewsPageState extends State<NewsPage> {
                           ),
                           width: 400,
                           height: 100,
-                          child: FadeInImage(
+                          child: const FadeInImage(
                             placeholder: AssetImage('assets/jar-loading.gif'),
                             image: AssetImage('assets/R.jpg',),
                             fit: BoxFit.cover,
