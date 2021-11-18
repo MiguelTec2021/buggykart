@@ -1,3 +1,4 @@
+import 'package:buggykart/src/pages/add_new.dart';
 import 'package:buggykart/src/pages/home_page.dart';
 import 'package:buggykart/src/pages/login_page.dart';
 import 'package:buggykart/src/pages/start_page.dart';
@@ -13,12 +14,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'HIGHWAY',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
       // home: StartPage(),
       initialRoute: '/',
       routes: {
         '/'        : (context) => const StartPage(),
         '/login'   : (context) => const LoginPage(),
         '/home'    : (context) =>const HomePage(),
+        '/addnew'  : (context) =>  AddNew(),
 
       },
     );

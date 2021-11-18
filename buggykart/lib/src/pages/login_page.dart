@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       print(response.body);
 
       if (response.body!='0') {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/home',);
       }else{
         showDialog(
         context: context,
@@ -129,7 +129,6 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: (){
                   user = usuario.text;
                   pass = contrasena.text;
-
                   if (user != '' && pass !="") {
                     ingresar(user, pass);
                   }else{
@@ -167,6 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                   
                 )
                 ),
+                const SizedBox(height: 20,),
+                InkWell(
+                  child:const  Text('No tienes cuenta'),
+                  onTap: (){
+
+                  },
+                )
             ],
           ),
           ]

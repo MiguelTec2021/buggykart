@@ -1,4 +1,5 @@
 import 'package:buggykart/src/pages/news_page.dart';
+import 'package:buggykart/src/pages/perfil_page.dart';
 import 'package:buggykart/src/pages/tutorial_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
 
   int _pagina = 0;
   final List<Widget> _paginas = [
     const NewsPage(),
-    const TutorialesPage(),
+    // const TutorialesPage(),
+    Perfil(),
   ];
 
   @override
@@ -25,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
+      drawer: Drawer(),
     );
   }
 
@@ -41,9 +45,13 @@ class _HomePageState extends State<HomePage> {
           label: "Noticias",
           icon: Icon(Icons.fiber_new_sharp)
         ),
+        // BottomNavigationBarItem(
+        //   label: "Tutoriales",
+        //   icon: Icon(Icons.extension_rounded)
+        // ),
         BottomNavigationBarItem(
-          label: "Tutoriales",
-          icon: Icon(Icons.extension_rounded)
+          label: "Perfil",
+          icon: Icon(Icons.person)
         ),
       ],
     );

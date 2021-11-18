@@ -31,10 +31,6 @@ class _StartPageState extends State<StartPage> {
             const SizedBox(height: 40.0,),
             Text('Bienvenido', style: _textTitle,),
             const SizedBox(height: 40.0,),
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            //   child: const Text('Comunidad', textAlign: TextAlign.center, ),
-            // ),
             const SizedBox(height: 30.0,),
             ElevatedButton(
               onPressed: (){
@@ -43,11 +39,8 @@ class _StartPageState extends State<StartPage> {
               child: const Text("Empezar",style: TextStyle(color: Colors.white, fontSize: 20.0)),
               style: ElevatedButton.styleFrom(
                 primary: Colors.blue[700],
-                onPrimary: Colors.blue
+                onPrimary: Colors.blue)
               )
-              
-              )
-
           ],
         ),
       ),
