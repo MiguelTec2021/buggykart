@@ -63,20 +63,6 @@ class _NewsPageState extends State<NewsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // const Text('Noticias'),
-            // Container(
-            //   // decoration: ,
-            //   padding: const EdgeInsets.all(10),
-            //   child:Column(
-            //     children: const [
-            //       Image(
-            //         image: NetworkImage('https://s1.eestatic.com/2018/12/19/elandroidelibre/el_androide_libre_361977453_181932670_1200x584.jpg')),
-            //         Text('Inciar juego', style: TextStyle(fontSize: 20),),
-            //         Text('La primera versión de juego de buggy kart')
-
-            //     ],
-            //   )
-            // ),
             Expanded(
               child: loading == true ? const Center(
                 child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(),),

@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
+  // String nombre ="";
 
   int _pagina = 0;
   final List<Widget> _paginas = [
@@ -27,7 +27,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: const Drawer(),
+      drawer: const Drawer(
+        child: Text('asd'),
+      ),
     );
   }
 
