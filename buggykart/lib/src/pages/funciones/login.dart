@@ -22,11 +22,13 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
         }
       ).timeout( const Duration(seconds: 60));
 
+      // ignore: unused_local_variable
       var data = jsonDecode(response.body);
 
       if (response.body !='0') {
         espera(context,false);
       }
+      // ignore: unused_local_variable
       int index =0;
       if (response.body!='0') {
         Navigator.pushNamed(context, '/home',);

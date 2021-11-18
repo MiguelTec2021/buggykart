@@ -1,6 +1,5 @@
 import 'package:buggykart/src/pages/news_page.dart';
 import 'package:buggykart/src/pages/perfil_page.dart';
-import 'package:buggykart/src/pages/tutorial_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _paginas = [
     const NewsPage(),
     // const TutorialesPage(),
-    Perfil(),
+    const Perfil(),
   ];
 
   @override
@@ -28,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: Drawer(),
+      drawer: const Drawer(),
     );
   }
 

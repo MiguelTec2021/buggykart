@@ -19,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
   // bool lod = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                 InkWell(
                   child:const  Text('No tienes cuenta'),
                   onTap: (){
-
+                    Navigator.pushNamed(context, '/register',);
                   },
                 )
             ],

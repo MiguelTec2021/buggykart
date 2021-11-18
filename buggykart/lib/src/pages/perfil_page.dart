@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 class Perfil extends StatefulWidget {
-  Perfil({Key? key}) : super(key: key);
+  const Perfil({Key? key}) : super(key: key);
 
   @override
   _PerfilState createState() => _PerfilState();
@@ -16,7 +16,7 @@ class _PerfilState extends State<Perfil> {
       appBar: AppBar(
         title: const Text('Perfil'),
       ),
-      drawer: Drawer(),
+      drawer: const Drawer(),
     );
   }
 }

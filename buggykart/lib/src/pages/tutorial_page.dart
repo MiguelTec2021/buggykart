@@ -9,7 +9,7 @@ class TutorialesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: Drawer(),
+      drawer: const Drawer(),
       body: Center(
         child: Column(
           children:const  [

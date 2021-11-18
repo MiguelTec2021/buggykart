@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 
 class AddNew extends StatefulWidget {
-  AddNew({Key? key}) : super(key: key);
+  const AddNew({Key? key}) : super(key: key);
 
   @override
   _AddNewState createState() => _AddNewState();
@@ -46,7 +46,8 @@ class _AddNewState extends State<AddNew> {
       }
     // ignore: empty_catches
     } on TimeoutException catch (e) {
-
+      // ignore: avoid_print
+      print(e);
     }
   }
 

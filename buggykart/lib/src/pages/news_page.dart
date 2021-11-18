@@ -20,6 +20,7 @@ class _NewsPageState extends State<NewsPage> {
 
   List<Data_news> data = <Data_news>[];
 
+  // ignore: non_constant_identifier_names
   Future<List<Data_news>> tomar_datos()async{
     var url = Uri.parse('http://192.168.56.1/apps/listNew.php');
 
@@ -51,11 +52,11 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Noticias'),),
-      drawer: Drawer(),
+      drawer: const Drawer(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> AddNew(),fullscreenDialog: true), );
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AddNew(),fullscreenDialog: true), );
         },
       ),
       body: Center(
