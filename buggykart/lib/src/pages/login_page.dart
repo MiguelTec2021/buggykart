@@ -30,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
         }
       ).timeout( const Duration(seconds: 60));
 
-
       var data = jsonDecode(response.body);
 
       int index =0;
@@ -75,9 +74,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Te
-      // ),
       body: Center(
         child: ListView(
           children: [Column(
@@ -116,15 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 50,),
-              // FlatButton(
-              //   onPressed:(){
-              //     Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomePage()));
-              //   },
-              //   color: Colors.red,
-              //   shape: const StadiumBorder(),
-              //   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
-              //   child: const Text('Empezar', style: TextStyle(color:Colors.white),) 
-              //   ),
               ElevatedButton(
                 onPressed: (){
                   user = usuario.text;
@@ -163,14 +150,13 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue[700],
                   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
-                  
-                )
+                  )
                 ),
                 const SizedBox(height: 20,),
                 InkWell(
                   child:const  Text('No tienes cuenta'),
                   onTap: (){
-
+                    
                   },
                 )
             ],
