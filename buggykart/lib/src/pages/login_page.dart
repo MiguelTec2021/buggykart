@@ -15,8 +15,6 @@ class _LoginPageState extends State<LoginPage> {
 
   String user = "";
   String pass = "";
-  String serve = 'http://192.168.56.1/apps/';
-  String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +37,23 @@ class _LoginPageState extends State<LoginPage> {
               const Text('Iniciar Sesión', style: TextStyle(fontFamily: 'museoBold', fontSize: 30.0),),
               const SizedBox(height: 20.0,),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextField(
                   controller: usuario,
                   decoration: const InputDecoration(
+                    icon: Icon(Icons.person),
                     hintText: 'Usuario',
                   ),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextField(
                   controller: contrasena,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    hintText: 'Constraseña',
+                    icon: Icon(Icons.vpn_key_rounded,),
+                    hintText: 'Contraseña',
                   ),
                 ),
               ),

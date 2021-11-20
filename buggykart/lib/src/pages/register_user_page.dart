@@ -34,10 +34,25 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
       // appBar: AppBar(title: const Text('Registrar nuevo usuario'),),
       body: Center(
         child: ListView(
+          // padding: EdgeInsets.symmetric(horizontal: 2),
           children: [Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40.0,),
+              const SizedBox(height: 20.0,),
+              Row(
+              
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(width: 20,),
+                  InkWell(
+                    child: const Icon(Icons.arrow_back,size: 30,),
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10.0,),
               const FadeInImage(
                 placeholder:  AssetImage('assets/load.gif'),
                 fadeInDuration: Duration(milliseconds: 200),
@@ -46,9 +61,9 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 height: 150,
                 width: 150,
                 ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 10,),
               const Text('Crear cuenta', style: TextStyle(fontFamily: 'museoBold', fontSize: 30.0),),
-              const SizedBox(height: 20.0,),
+              const SizedBox(height: 10.0,),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(

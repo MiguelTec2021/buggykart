@@ -21,29 +21,23 @@ String usuario = "";
       espera(context ,true);
       var url = Uri.parse('${serve}server.php');
       var response = await http.post(url, body: {
+        'page' : 'login',
         'usuario' : useri,
         'password' :passi,
         }
       ).timeout( const Duration(seconds: 60));
 
-      // ignore: unused_local_variable
+
       var data = jsonDecode(response.body);
 
       if (response.body !='0') {
         espera(context,false);
       }
-      // ignore: unused_local_variable
+
       int index =0;
-      print(response.body);
-      
+
       if (response.body!='0') {
-        indexs = data[index]['id_usuario'];
-        
-        // ignore: avoid_print
-        print(nombre);
         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HomePage()));
-        // ignore: avoid_print
-        // print(data[index].nombre);
       }else{
         espera(context, false);
         showDialog(
@@ -62,11 +56,12 @@ String usuario = "";
         builder: (BuildContext context){
           return const AlertDialog(
             title: Text('HIGHWAY'),
-            content: Text('Tardo la conexión, revise su conexión a internet'),
+            content: Text('Error con la base de datos'),
           );
         });
     // ignore: unused_catch_clause
     }on Error catch (e){
+      // ignore: avoid_print
       print(e);
       showDialog(
         context: context,

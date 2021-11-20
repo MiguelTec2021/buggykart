@@ -80,7 +80,7 @@ class _NewsPageState extends State<NewsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             // color: Colors.grey
                           ),
                           child: Text(data[index].titulo, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),

@@ -18,6 +18,7 @@ void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)a
 
     var url = Uri.parse('${serve}validaruser.php');
     var response =  await http.post(url,body: {
+      'usuario' : usuario,
       'email' : email,
     }).timeout(const Duration(seconds: 60));
 
@@ -35,7 +36,7 @@ void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)a
         builder: (BuildContext context){
           return const AlertDialog(
             title: Text('HIGHWAY'),
-            content: Text('El correo ya existe'),
+            content: Text('El correo o usuario ya existe'),
           );
         });
     }
