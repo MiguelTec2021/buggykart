@@ -55,7 +55,6 @@ void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)a
 
 void registrar(context, nombre, apellidos, edad, usuario, email, contra)async{
 
-
   try {
     
   

@@ -2,11 +2,13 @@ import 'package:buggykart/src/pages/news_page.dart';
 import 'package:buggykart/src/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
 
-
+String serve = 'http://192.168.56.1/apps/';
+String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
       drawer: const Drawer(
-        child: Text('asd'),
+        child: Text(''),
       ),
     );
   }

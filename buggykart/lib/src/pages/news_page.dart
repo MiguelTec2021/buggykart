@@ -1,10 +1,14 @@
 import 'dart:convert';
 
 import 'package:buggykart/src/pages/add_new.dart';
+// import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'clases/data_news.dart';
+
+String serve = 'http://192.168.56.1/apps/';
+String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 class NewsPage extends StatefulWidget {
@@ -22,7 +26,7 @@ class _NewsPageState extends State<NewsPage> {
 
   // ignore: non_constant_identifier_names
   Future<List<Data_news>> tomar_datos()async{
-    var url = Uri.parse('http://192.168.56.1/apps/listNew.php');
+    var url = Uri.parse('${serve}listNew.php');
 
     var response = await http.post(url).timeout(const Duration(seconds: 60));
 
@@ -51,7 +55,7 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Noticias'),),
+      // appBar: AppBar(title: const Text('Noticias'),),
       drawer: const Drawer(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -63,6 +67,7 @@ class _NewsPageState extends State<NewsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 20,),
             Expanded(
               child: loading == true ? const Center(
                 child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator(),),
@@ -75,6 +80,11 @@ class _NewsPageState extends State<NewsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
+                          decoration: BoxDecoration(
+                            // color: Colors.grey
+                          ),
+                          child: Text(data[index].titulo, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                        Container(
                           decoration: const BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -83,17 +93,21 @@ class _NewsPageState extends State<NewsPage> {
                               ),
                             ),
                           ),
-                          width: 400,
-                          height: 100,
+                          // color: Colors.red,
+                          width: 220,
+                          height: 250,
                           child: const FadeInImage(
                             placeholder: AssetImage('assets/jar-loading.gif'),
-                            image: AssetImage('assets/R.jpg',),
+                            image: AssetImage('assets/Highway-logo-color.png',),
                             fit: BoxFit.cover,
+                            height: 30,
+                            width: 30,
                           ),
                         ),
                         ListTile(
-                          title: Text(data[index].titulo),
+                          title: const Text('Descripción:'),
                           subtitle: Text(data[index].contenido),
+                          tileColor: Colors.grey[300],
                         ),
                         const SizedBox(height: 10,),
                       ],

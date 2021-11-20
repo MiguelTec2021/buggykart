@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 // import 'package:image_picker/image_picker.dart';
 // import 'dart:io';
 
+String serve = 'http://192.168.56.1/apps/';
+String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 class AddNew extends StatefulWidget {
   const AddNew({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _AddNewState extends State<AddNew> {
 
   void agregarnoticia(titulor, contenidor, imagen)async{
     try {
-      var url = Uri.parse('http://192.168.56.1/apps/addnew.php');
+      var url = Uri.parse('${serve}addnew.php');
       var response = await http.post(url, body: {
         'titulo' : titulor,
         'contenido' : contenidor,

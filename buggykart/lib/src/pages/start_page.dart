@@ -1,6 +1,9 @@
 import 'package:buggykart/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
+String serve = 'http://192.168.56.1/apps/';
+String serve2 = 'https://proyecttjyw.000webhostapp.com/';
+
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);

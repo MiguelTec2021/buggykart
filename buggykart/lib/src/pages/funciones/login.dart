@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
+int indexs = 0;
 String nombre = "";
 String edad = "";
 String correo = "";
@@ -33,13 +34,12 @@ String usuario = "";
       }
       // ignore: unused_local_variable
       int index =0;
+      print(response.body);
       
       if (response.body!='0') {
-        nombre = data[index]['nombre'];
-        // edad = data[index]['edad'];
-        // correo = data[index]['correo'];
-        // usuario = data[index]['usuario'];
+        indexs = data[index]['id_usuario'];
         
+        // ignore: avoid_print
         print(nombre);
         Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HomePage()));
         // ignore: avoid_print
@@ -67,12 +67,13 @@ String usuario = "";
         });
     // ignore: unused_catch_clause
     }on Error catch (e){
+      print(e);
       showDialog(
         context: context,
         builder: (BuildContext context){
           return const AlertDialog(
             title: Text('HIGHWAY'),
-            content: Text('Tardo la conexión, revise su conexión a internet'),
+            content: Text('Tardo la conexión, revise su conexión a internet2'),
           );
         });
     }
