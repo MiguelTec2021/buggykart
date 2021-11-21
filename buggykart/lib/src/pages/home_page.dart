@@ -2,6 +2,8 @@ import 'package:buggykart/src/pages/news_page.dart';
 import 'package:buggykart/src/pages/perfil_page.dart';
 import 'package:flutter/material.dart';
 
+import 'funciones/login.dart';
+
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
@@ -20,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   int _pagina =  0;
   final List<Widget> _paginas = [
     const NewsPage(),
-    Perfil(),
+    Perfil(idUsuario),
   ];
 
   _HomePageState(int idUsuario);
@@ -32,9 +34,7 @@ class _HomePageState extends State<HomePage> {
       // appBar: AppBar(title: Text(widget.idUsuario.toString()),),
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: Drawer(
-        child: Text(widget.idUsuario.toString()),
-      ),
+      // drawer: Drawer(child: Text(widget.idUsuario.toString()),),
     );
   }
 

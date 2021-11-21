@@ -1,15 +1,18 @@
 import 'dart:convert';
-import 'dart:js';
 import 'package:buggykart/src/pages/clases/data_user.dart';
+import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
-Future<DataUser> fetchAlbum() async {
+Future<DataUser> fetchAlbum(id) async {
+  var url = Uri.parse('${serve}user/datos.php');
   final response = await http
-      .get(Uri.parse('${serve}user/datos.php'));
+      .post(url, body: {
+        'index' : id.toString()
+      });
 
   if (response.statusCode == 200) {
     var datos = jsonDecode(response.body);
@@ -20,7 +23,7 @@ Future<DataUser> fetchAlbum() async {
 }
 
 class Perfil extends StatefulWidget {
-  const Perfil({Key? key}) : super(key: key);
+  const Perfil(int idUsuario, {Key? key}) : super(key: key);
 
   @override
   _PerfilState createState() => _PerfilState();
@@ -32,7 +35,7 @@ class _PerfilState extends State<Perfil> {
   @override
   void initState() {
     super.initState();
-    user = fetchAlbum();
+    user = fetchAlbum(idUsuario);
   }
 
   @override
@@ -46,13 +49,67 @@ class _PerfilState extends State<Perfil> {
           future: user,
           builder: (context, snapshot){
             if (snapshot.hasData) {
-              return Text(snapshot.data!.nombre);
+              return Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      const FadeInImage(
+                        placeholder: AssetImage('assets/load.gif'),
+                        image: AssetImage('assets/back.jpeg'),
+                        // image: NetworkImage('http://192.168.56.1/apps/fotos/eri.jpg'),
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(width: 10,),
+                          _fotodeperfil(),
+                          const SizedBox(width: 20,),
+                          Column(
+                            children: [
+                              Text("Usuario: "+snapshot.data!.usuario, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
+                              const SizedBox(width: 100,),
+                              Text(snapshot.data!.nombreRol, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                    // SizedBox(height: 10.0,)
+                ],
+              );
             }else if(snapshot.hasError){
               return Text('${snapshot.error}');
             }
             return const CircularProgressIndicator();
           },
         ),
+      ),
+    );
+  }
+  Widget _fotodeperfil(){
+    final foto = Container(
+      child: Column(
+        children: [
+          FadeInImage(
+            placeholder: const AssetImage('assets/load.gif'),
+            image: NetworkImage('${serve}fotos/eri.jpg'),
+            fadeInDuration: const  Duration(milliseconds: 200),
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+          // Image(image: NetworkImage('http://192.168.56.1/apps/fotos/eri.jpg'))
+        ],
+      ),
+    );
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50.0),
+      ),
+      child: ClipRRect(
+        child: foto,
+        borderRadius: BorderRadius.circular(50.0),
       ),
     );
   }

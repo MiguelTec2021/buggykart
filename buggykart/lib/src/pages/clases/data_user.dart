@@ -1,11 +1,20 @@
 class DataUser {
   final int userId;
-  // final int id;
   final String nombre;
+  final String apellidos;
+  final String edad;
+  final String usuario;
+  final String email;
+  final String nombreRol;
 
   DataUser({
     required this.userId,
     required this.nombre,
+    required this.apellidos,
+    required this.edad,
+    required this.usuario,
+    required this.email,
+    required this.nombreRol,
     // required this.title,
   });
 
@@ -13,6 +22,11 @@ class DataUser {
     return DataUser(
       userId: json['id_usuario'],
       nombre: json['nombre'],
+      apellidos: json['apellidos'],
+      edad: json['edad'],
+      usuario: json['usuario'],
+      email: json['email'],
+      nombreRol: json['nombrerol'],
       // title: json['title'],
     );
   }
