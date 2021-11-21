@@ -10,11 +10,12 @@ import 'package:http/http.dart' as http;
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
-int indexs = 0;
-String nombre = "";
-String edad = "";
-String correo = "";
-String usuario = "";
+int index = 0;
+int idUsuario = 0;
+// String nombre = "";
+// String edad = "";
+// String correo = "";
+// String usuario = "";
 
   void ingresar(context, useri, passi)async{
     try {
@@ -30,14 +31,16 @@ String usuario = "";
 
       var data = jsonDecode(response.body);
 
+      idUsuario = data[0]['id_usuario'];
+      // ignore: avoid_print
+      print(idUsuario);
+
       if (response.body !='0') {
         espera(context,false);
       }
 
-      int index =0;
-
       if (response.body!='0') {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HomePage()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario)));
       }else{
         espera(context, false);
         showDialog(

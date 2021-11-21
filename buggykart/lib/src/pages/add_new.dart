@@ -41,7 +41,7 @@ class _AddNewState extends State<AddNew> {
       var datos = jsonDecode(response.body);
 
       if (datos) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HomePage()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(0)));
 
       }else{
         

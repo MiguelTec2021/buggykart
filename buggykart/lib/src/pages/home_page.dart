@@ -7,30 +7,33 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  int idUsuario = 2;
+  HomePage(this.idUsuario,{Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(idUsuario);
 }
 
-class _HomePageState extends State<HomePage> {
-  // String nombre ="";
 
-  int _pagina = 0;
+class _HomePageState extends State<HomePage> {
+  
+  int _pagina =  0;
   final List<Widget> _paginas = [
     const NewsPage(),
-    // const TutorialesPage(),
-    const Perfil(),
+    Perfil(),
   ];
+
+  _HomePageState(int idUsuario);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      // appBar: AppBar(title: Text(widget.idUsuario.toString()),),
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: const Drawer(
-        child: Text(''),
+      drawer: Drawer(
+        child: Text(widget.idUsuario.toString()),
       ),
     );
   }
@@ -42,16 +45,13 @@ class _HomePageState extends State<HomePage> {
           _pagina = index;
         });
       },
+
       currentIndex: _pagina,
       items: const [
         BottomNavigationBarItem(
           label: "Noticias",
           icon: Icon(Icons.fiber_new_sharp)
         ),
-        // BottomNavigationBarItem(
-        //   label: "Tutoriales",
-        //   icon: Icon(Icons.extension_rounded)
-        // ),
         BottomNavigationBarItem(
           label: "Perfil",
           icon: Icon(Icons.person)
