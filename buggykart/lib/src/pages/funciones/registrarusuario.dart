@@ -12,7 +12,7 @@ String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
-void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)async{
+void registrarUsuario(context, nombre, fotou, apellidos, edad, usuario, email, contra)async{
   
   try {
 
@@ -27,7 +27,7 @@ void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)a
 
     if (response.body != '1') {
       // registrar(nombre, apellidos, edad, usuario, email, contra);
-      terandcon(context,nombre, apellidos, edad, usuario, email, contra);
+      terandcon(context,nombre, fotou,apellidos, edad, usuario, email, contra);
       // ignore: avoid_print
       print('si');
     }else{
@@ -54,7 +54,7 @@ void registrarUsuario(context, nombre, apellidos, edad, usuario, email, contra)a
   }
 }
 
-void registrar(context, nombre, apellidos, edad, usuario, email, contra)async{
+void registrar(context, nombre, fotou, apellidos, edad, usuario, email, contra)async{
 
   try {
     
@@ -65,6 +65,7 @@ void registrar(context, nombre, apellidos, edad, usuario, email, contra)async{
       'apellidos' : apellidos,
       'edad' : edad,
       'usuario' : usuario,
+      'foto' : fotou,
       'email' : email,
       'contra' : contra
     }).timeout(const Duration(seconds: 60));

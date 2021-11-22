@@ -4,6 +4,7 @@ class DataUser {
   final String apellidos;
   final String edad;
   final String usuario;
+  final String foto;
   final String email;
   final String nombreRol;
 
@@ -13,6 +14,7 @@ class DataUser {
     required this.apellidos,
     required this.edad,
     required this.usuario,
+    required this.foto,
     required this.email,
     required this.nombreRol,
     // required this.title,
@@ -25,6 +27,7 @@ class DataUser {
       apellidos: json['apellidos'],
       edad: json['edad'],
       usuario: json['usuario'],
+      foto: json['foto'],
       email: json['email'],
       nombreRol: json['nombrerol'],
       // title: json['title'],

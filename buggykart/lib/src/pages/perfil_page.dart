@@ -62,7 +62,7 @@ class _PerfilState extends State<Perfil> {
                       Row(
                         children: [
                           const SizedBox(width: 10,),
-                          _fotodeperfil(),
+                          _fotodeperfil(snapshot.data!.foto),
                           const SizedBox(width: 20,),
                           Column(
                             children: [
@@ -87,13 +87,13 @@ class _PerfilState extends State<Perfil> {
       ),
     );
   }
-  Widget _fotodeperfil(){
+  Widget _fotodeperfil(fotou){
     final foto = Container(
       child: Column(
         children: [
           FadeInImage(
             placeholder: const AssetImage('assets/load.gif'),
-            image: NetworkImage('${serve}fotos/eri.jpg'),
+            image: NetworkImage('${serve}fotos/'+fotou),
             fadeInDuration: const  Duration(milliseconds: 200),
             height: 100,
             fit: BoxFit.cover,

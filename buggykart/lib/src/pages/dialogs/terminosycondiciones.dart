@@ -1,7 +1,7 @@
 import 'package:buggykart/src/pages/funciones/registrarusuario.dart';
 import 'package:flutter/material.dart';
 
-void terandcon(context,nombre, apellidos, edad, usuario, email, contra){
+void terandcon(context,nombre, fotou, apellidos, edad, usuario, email, contra){
       showDialog(
       context: context,
       builder: (context) {
@@ -12,7 +12,7 @@ void terandcon(context,nombre, apellidos, edad, usuario, email, contra){
             InkWell(
               child: const Text('Aceptar'),
               onTap: (){
-                  registrar(context, nombre, apellidos, edad, usuario, email, contra);
+                  registrar(context, nombre, fotou, apellidos, edad, usuario, email, contra);
               },
             )
           ],

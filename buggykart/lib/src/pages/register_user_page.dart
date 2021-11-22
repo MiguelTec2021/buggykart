@@ -1,8 +1,12 @@
 import 'package:buggykart/src/pages/funciones/registrarusuario.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
 
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
+String foto ="";
 
 
 class RegisterUserPage extends StatefulWidget {
@@ -27,6 +31,62 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   String user = "";
   String email = "";
   String password = "";
+  String fotou = "";
+
+  File? imagen ;
+
+  final picker = ImagePicker();
+
+  Future selImage(op)async{
+
+    var pickerFile;
+    if(op == 1){
+      // ignore: deprecated_member_use
+      pickerFile = await picker.pickImage(source: ImageSource.camera);
+    }else{
+      // ignore: deprecated_member_use
+      pickerFile = await picker.pickImage(source: ImageSource.gallery); 
+    }
+
+    setState(() {
+      if(pickerFile != null){
+        imagen = File(pickerFile.path);
+        // cortar(File(pickerFile.path));
+      }else{
+        // ignore: avoid_print
+        print('No seleccionaste');
+      }
+      Navigator.of(context).pop();
+
+    });
+  }
+  Dio dio = Dio();
+
+  Future<void> subir_imagen()async{
+    try {
+      String filename = imagen!.path.split('/').last;
+
+      FormData formData = FormData.fromMap({
+        // 'usuario': 'ideusuario',
+        // 'nombre' : 'nombre',
+        'file' : await MultipartFile.fromFile(
+          imagen!.path, filename: filename
+        )
+      }); 
+      String imagens;
+
+      var response = await dio.post('${serve}subir.php',
+      data : formData);
+
+      foto = response.toString();
+
+      print('nombre de la foto: '+ foto);
+
+
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +113,94 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 ],
               ),
               const SizedBox(height: 10.0,),
-              const FadeInImage(
-                placeholder:  AssetImage('assets/load.gif'),
-                fadeInDuration: Duration(milliseconds: 200),
-                image:  AssetImage('assets/Highway-logo-color.png'),
-                fit: BoxFit.contain,
-                height: 150,
-                width: 150,
-                ),
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  const FadeInImage(
+                  placeholder:  AssetImage('assets/load.gif'),
+                  fadeInDuration: Duration(milliseconds: 200),
+                  image:  AssetImage('assets/Highway-logo-color.png'),
+                  fit: BoxFit.contain,
+                  height: 150,
+                  width: 150,
+                  ),
+                  InkWell(
+                    child: const Icon(Icons.add_a_photo, size: 35,),
+                    onTap:(){
+                      showDialog(
+                        context: context,
+                        builder: (context){
+                          return AlertDialog(
+                            content: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: (){
+                                      selImage(1);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        border: Border(bottom:  BorderSide(
+                                          width: 1,
+                                          color: Colors.grey
+                                        ))
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Tomar una foto', style: TextStyle(fontSize: 16),),
+                                          ),
+                                          Icon(Icons.camera_alt, color: Colors.blue,),
+
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // InkWell(
+                                  //   onTap: (){
+                                  //       selImage(2);
+                                  //   },
+                                  //   child: Container(
+                                  //     padding: EdgeInsets.all(20),
+                                  //     child: Row(
+                                  //       children: [
+                                  //         Expanded(
+                                  //           child: Text('Selecionar una foto', style: TextStyle(fontSize: 16),),
+                                  //         ),
+                                  //         Icon(Icons.image, color: Colors.blue,),
+
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Cancelar', style: TextStyle(fontSize: 16, color: Colors.white ,), textAlign: TextAlign.center),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                    }
+                  )
+                ],
+              ),
               const SizedBox(height: 10,),
               const Text('Crear cuenta', style: TextStyle(fontFamily: 'museoBold', fontSize: 30.0),),
               const SizedBox(height: 10.0,),
@@ -131,7 +271,8 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
 
                   if (name != '' && lasname != '' && years != '' && user != '' && email != '' && password!= '') {
                     // ingresar(context,user, pass);
-                    registrarUsuario(context, name, lasname, years, user, email, password);
+                    registrarUsuario(context, name, foto, lasname, years, user, email, password);
+                    subir_imagen();
                   }else{
                     showDialog(
                       context: context,
