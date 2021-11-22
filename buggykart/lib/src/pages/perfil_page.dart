@@ -57,6 +57,9 @@ class _PerfilState extends State<Perfil> {
                       const FadeInImage(
                         placeholder: AssetImage('assets/load.gif'),
                         image: AssetImage('assets/back.jpeg'),
+                        height: 200,
+                        width: 480,
+                        fit: BoxFit.cover,
                         // image: NetworkImage('http://192.168.56.1/apps/fotos/eri.jpg'),
                       ),
                       Row(
@@ -89,11 +92,13 @@ class _PerfilState extends State<Perfil> {
   }
   Widget _fotodeperfil(fotou){
     final foto = Container(
+      // height: 100,
       child: Column(
         children: [
           FadeInImage(
             placeholder: const AssetImage('assets/load.gif'),
-            image: NetworkImage('${serve}fotos/'+fotou),
+            image: NetworkImage('${serve}fotos/'+fotou.toString()),
+            // image: const AssetImage('assets/load.gif'),
             fadeInDuration: const  Duration(milliseconds: 200),
             height: 100,
             fit: BoxFit.cover,
@@ -105,11 +110,11 @@ class _PerfilState extends State<Perfil> {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50.0),
+        borderRadius: BorderRadius.circular(60.0),
       ),
       child: ClipRRect(
         child: foto,
-        borderRadius: BorderRadius.circular(50.0),
+        borderRadius: BorderRadius.circular(80.0),
       ),
     );
   }

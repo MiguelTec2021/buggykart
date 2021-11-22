@@ -30,10 +30,12 @@ int idUsuario = 0;
 
 
       var data = jsonDecode(response.body);
-
-      idUsuario = data[0]['id_usuario'];
-      // ignore: avoid_print
-      print(idUsuario);
+      
+        if (response.body!='0') {
+          idUsuario = data[0]['id_usuario'];
+        }
+      // // ignore: avoid_print
+      // print(idUsuario);
 
       if (response.body !='0') {
         espera(context,false);
