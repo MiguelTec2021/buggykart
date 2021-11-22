@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:buggykart/src/pages/dialogs/espera.dart';
 import 'package:buggykart/src/pages/home_page.dart';
+import 'package:buggykart/src/pages/home_user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,7 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 int index = 0;
 int idUsuario = 0;
+int idrol = 0 ;
 // String nombre = "";
 // String edad = "";
 // String correo = "";
@@ -20,7 +22,7 @@ int idUsuario = 0;
   void ingresar(context, useri, passi)async{
     try {
       espera(context ,true);
-      var url = Uri.parse('${serve}server.php');
+      var url = Uri.parse('${serve2}server.php');
       var response = await http.post(url, body: {
         'page' : 'login',
         'usuario' : useri,
@@ -33,16 +35,21 @@ int idUsuario = 0;
       
         if (response.body!='0') {
           idUsuario = data[0]['id_usuario'];
+          idrol = data[0]['id_rol'];
         }
       // // ignore: avoid_print
-      // print(idUsuario);
+      print("Cual es el rol:  "+ idrol.toString());
 
       if (response.body !='0') {
         espera(context,false);
       }
 
       if (response.body!='0') {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario)));
+        if (idrol == 2) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeUser(idUsuario, idrol)));
+        }else{
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario, idrol)));
+        }
       }else{
         espera(context, false);
         showDialog(

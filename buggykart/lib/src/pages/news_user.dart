@@ -11,14 +11,14 @@ String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
-class NewsPage extends StatefulWidget {
-  const NewsPage({Key? key}) : super(key: key);
+class NewsUser extends StatefulWidget {
+  const NewsUser({Key? key}) : super(key: key);
 
   @override
-  State<NewsPage> createState() => _NewsPageState();
+  State<NewsUser> createState() => _NewsUserState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class _NewsUserState extends State<NewsUser> {
 
   bool loading = true;
 
@@ -56,13 +56,13 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: const Text('Noticias'),),
-      drawer: const Drawer(),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AddNew(),fullscreenDialog: true), );
-        },
-      ),
+      // drawer: const Drawer(),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.add),
+      //   onPressed: (){
+      //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AddNew(),fullscreenDialog: true), );
+      //   },
+      // ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

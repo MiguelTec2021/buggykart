@@ -8,7 +8,7 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 Future<DataUser> fetchAlbum(id) async {
-  var url = Uri.parse('${serve}user/datos.php');
+  var url = Uri.parse('${serve2}user/datos.php');
   final response = await http
       .post(url, body: {
         'index' : id.toString()
@@ -97,7 +97,7 @@ class _PerfilState extends State<Perfil> {
         children: [
           FadeInImage(
             placeholder: const AssetImage('assets/load.gif'),
-            image: NetworkImage('${serve}fotos/'+fotou.toString()),
+            image: NetworkImage('${serve2}fotos/'+fotou),
             // image: const AssetImage('assets/load.gif'),
             fadeInDuration: const  Duration(milliseconds: 200),
             height: 100,

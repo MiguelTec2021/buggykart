@@ -30,7 +30,7 @@ class _AddNewState extends State<AddNew> {
 
   void agregarnoticia(titulor, contenidor, imagen)async{
     try {
-      var url = Uri.parse('${serve}addnew.php');
+      var url = Uri.parse('${serve2}addnew.php');
       var response = await http.post(url, body: {
         'titulo' : titulor,
         'contenido' : contenidor,
@@ -41,7 +41,7 @@ class _AddNewState extends State<AddNew> {
       var datos = jsonDecode(response.body);
 
       if (datos) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(0)));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(0,0)));
 
       }else{
         

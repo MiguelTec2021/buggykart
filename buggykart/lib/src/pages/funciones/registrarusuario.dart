@@ -16,7 +16,7 @@ void registrarUsuario(context, nombre, fotou, apellidos, edad, usuario, email, c
   
   try {
 
-    var url = Uri.parse('${serve}validaruser.php');
+    var url = Uri.parse('${serve2}validaruser.php');
     var response =  await http.post(url,body: {
       'usuario' : usuario,
       'email' : email,
@@ -59,7 +59,7 @@ void registrar(context, nombre, fotou, apellidos, edad, usuario, email, contra)a
   try {
     
   
-    var url = Uri.parse('${serve}userregister.php');
+    var url = Uri.parse('${serve2}userregister.php');
     var response =  await http.post(url,body: {
       'nombre' : nombre,
       'apellidos' : apellidos,

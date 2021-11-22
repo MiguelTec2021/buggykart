@@ -31,7 +31,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   String user = "";
   String email = "";
   String password = "";
-  String fotou = "";
+  String fotou = "d.png";
 
   File? imagen ;
 
@@ -75,7 +75,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
       }); 
       String imagens;
 
-      var response = await dio.post('${serve}subir.php',
+      var response = await dio.post('${serve2}subir.php',
       data : formData);
 
       foto = response.toString();
@@ -272,6 +272,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   if (name != '' && lasname != '' && years != '' && user != '' && email != '' && password!= '') {
                     // ingresar(context,user, pass);
                     registrarUsuario(context, name, foto, lasname, years, user, email, password);
+                    // print(foto.toString());
                     subir_imagen();
                   }else{
                     showDialog(
