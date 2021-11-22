@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   
   int _pagina =  0;
   final List<Widget> _paginas = [
-    const NewsPage(),
+    NewsPage(idUsuario),
     Perfil(idUsuario),
   ];
 

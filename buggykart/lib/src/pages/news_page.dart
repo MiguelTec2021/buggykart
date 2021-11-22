@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:buggykart/src/pages/add_new.dart';
+import 'package:buggykart/src/pages/funciones/login.dart';
 // import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -12,10 +13,10 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 class NewsPage extends StatefulWidget {
-  const NewsPage({Key? key}) : super(key: key);
+  const NewsPage(int idUsuario, {Key? key}) : super(key: key);
 
   @override
-  State<NewsPage> createState() => _NewsPageState();
+  State<NewsPage> createState() => _NewsPageState(idUsuario);
 }
 
 class _NewsPageState extends State<NewsPage> {
@@ -23,6 +24,8 @@ class _NewsPageState extends State<NewsPage> {
   bool loading = true;
 
   List<Data_news> data = <Data_news>[];
+
+  _NewsPageState(int idUsuario);
 
   // ignore: non_constant_identifier_names
   Future<List<Data_news>> tomar_datos()async{
@@ -60,7 +63,7 @@ class _NewsPageState extends State<NewsPage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AddNew(),fullscreenDialog: true), );
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> AddNew(idUsuario),fullscreenDialog: true), );
         },
       ),
       body: Center(
@@ -80,36 +83,58 @@ class _NewsPageState extends State<NewsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          decoration: const BoxDecoration(
-                            // color: Colors.grey
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[400],
                           ),
-                          child: Text(data[index].titulo, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10,),
+                              SizedBox(
+                                width: 30,
+                                height: 30,
+                                child:Image.asset('assets/Highway-logo-color.png'),
+                              ),
+                              const SizedBox(width: 10,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 5.0),
+                                  Text(data[index].nombreU, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                  Text(data[index].titulo, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.white)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
-                          decoration: const BoxDecoration(
+                          // color: Colors.black,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[400],
                             border: Border(
                               bottom: BorderSide(
-                                color: Colors.grey,
+                                // color: Colors.grey,
                                 width: 1,
                               ),
                             ),
                           ),
                           // color: Colors.red,
-                          width: 220,
-                          height: 250,
+                          width: 450,
+                          height: 100,
                           child: const FadeInImage(
                             placeholder: AssetImage('assets/jar-loading.gif'),
                             image: AssetImage('assets/Highway-logo-color.png',),
-                            fit: BoxFit.cover,
-                            height: 30,
-                            width: 30,
+                            // fit: BoxFit.cover,
+                            height: 100,
+                            width: 100,
                           ),
                         ),
                         ListTile(
-                          title: const Text('Descripción:'),
-                          subtitle: Text(data[index].contenido),
+                          title: Text(data[index].contenido, style: TextStyle(fontSize: 14),),
+                          // subtitle: Text(data[index].contenido),
                           tileColor: Colors.grey[300],
                         ),
-                        const SizedBox(height: 10,),
+                        // const SizedBox(height: 10,),
                       ],
                     ),
                   );

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:buggykart/src/pages/home_page.dart';
 // import 'package:buggykart/src/pages/news_page.dart';
 // import 'package:dio/dio.dart';
@@ -13,10 +14,10 @@ String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 class AddNew extends StatefulWidget {
-  const AddNew({Key? key}) : super(key: key);
+  const AddNew(idUsuario, {Key? key}) : super(key: key);
 
   @override
-  _AddNewState createState() => _AddNewState();
+  _AddNewState createState() => _AddNewState(idUsuario);
 }
 
 class _AddNewState extends State<AddNew> {
@@ -28,12 +29,15 @@ class _AddNewState extends State<AddNew> {
   String contenidor = "";
   String imagenn ="";
 
-  void agregarnoticia(titulor, contenidor, imagen)async{
+  _AddNewState(int idUsuario);
+
+  void agregarnoticia(titulor, contenidor, imagen, idUsuario)async{
     try {
       var url = Uri.parse('${serve2}addnew.php');
       var response = await http.post(url, body: {
         'titulo' : titulor,
         'contenido' : contenidor,
+        'user' : idUsuario.toString(),
         // 'foto' : imagen,
         // 'usuario' : 2,
       }).timeout(const Duration(seconds: 60));
@@ -88,7 +92,7 @@ class _AddNewState extends State<AddNew> {
                       titulor = titulo.text;
                       contenidor = contenido.text;
                       // imagenn = subir_imagen() as String;
-                      agregarnoticia(titulor, contenidor, imagenn);
+                      agregarnoticia(titulor, contenidor, imagenn, idUsuario);
                     },
                     
                   ),
