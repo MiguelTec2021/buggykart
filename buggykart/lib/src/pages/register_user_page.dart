@@ -1,8 +1,10 @@
+import 'package:buggykart/src/pages/dialogs/alert.dart';
 import 'package:buggykart/src/pages/funciones/registrarusuario.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'funciones/validacion.dart';
 
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
@@ -32,6 +34,9 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   String email = "";
   String password = "";
   String fotou = "d.png";
+  // String _errorText = "";
+
+
 
   File? imagen ;
 
@@ -211,6 +216,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: nombre,
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     hintText: 'Nombre',
                   ),
@@ -220,6 +226,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: apellidos,
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     hintText: 'Apellidos',
                   ),
@@ -229,6 +236,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: edad,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     hintText: 'edad',
                   ),
@@ -238,6 +246,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: usuario,
+                  textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     hintText: 'Usuario',
                   ),
@@ -247,8 +256,10 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
                   controller: correo,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     hintText: 'Email',
+                    // errorText: _getErrorText(),
                   ),
                 ),
               ),
@@ -271,12 +282,19 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   user = usuario.text;
                   email = correo.text;
                   password = contra.text;
+                  
 
                   if (name != '' && lasname != '' && years != '' && user != '' && email != '' && password!= '') {
                     // ingresar(context,user, pass);
-                    registrarUsuario(context, name, foto, lasname, years, user, email, password);
+                      // ignore: avoid_print
+                      print(isEmail(email));
+                    if (isEmail(email)==false) {
+                      alerrt(context, 'correo');
+                    }else {
+                      registrarUsuario(context, name, foto, lasname, years, user, email, password);
+                      subirimagen();
+                    }
                     // print(foto.toString());
-                    subirimagen();
                   }else{
                     showDialog(
                       context: context,
@@ -321,6 +339,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                   usuario.text = "";
                   correo.text = "";
                   contra.text = "";
+                  foto = "";
 
 
                 }, 
@@ -336,5 +355,9 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
         ),
       ),
     );
+    
   }
+
+  
+
 }
