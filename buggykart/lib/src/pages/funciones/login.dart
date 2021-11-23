@@ -37,6 +37,7 @@ int idrol = 0 ;
           idrol = data[0]['id_rol'];
         }
       // // ignore: avoid_print
+      // ignore: avoid_print
       print("Cual es el rol:  "+ idrol.toString());
 
       if (response.body !='0') {

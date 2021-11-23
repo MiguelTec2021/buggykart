@@ -17,6 +17,7 @@ class AddNew extends StatefulWidget {
   const AddNew(idUsuario, {Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   _AddNewState createState() => _AddNewState(idUsuario);
 }
 

@@ -8,12 +8,14 @@ String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   int idUsuario = 0;
   int idrol = 0;
   HomePage(this.idUsuario,this.idrol,{Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   _HomePageState createState() => _HomePageState(idUsuario);
 }
 
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       // appBar: AppBar(title: Text(widget.idUsuario.toString()),),
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: idrol==1 ? Drawer(): null,
+      drawer: idrol==1 ? const Drawer(): null,
     );
   }
 
