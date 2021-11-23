@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   
   int _pagina =  0;
   final List<Widget> _paginas = [
-    NewsPage(idUsuario),
+    NewsPage(idUsuario, idrol),
     Perfil(idUsuario),
   ];
 
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       // appBar: AppBar(title: Text(widget.idUsuario.toString()),),
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: Drawer(child: Text(widget.idUsuario.toString()),),
+      drawer: idrol==1 ? Drawer(): null,
     );
   }
 

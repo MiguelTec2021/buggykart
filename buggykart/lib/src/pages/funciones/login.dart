@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:buggykart/src/pages/dialogs/espera.dart';
 import 'package:buggykart/src/pages/home_page.dart';
-import 'package:buggykart/src/pages/home_user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,11 +44,15 @@ int idrol = 0 ;
       }
 
       if (response.body!='0') {
-        if (idrol == 2) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeUser(idUsuario, idrol)));
-        }else{
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario, idrol)));
-        }
+        // if (idrol == 2) {
+        //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomeUser(idUsuario, idrol)));
+        // }else{
+        //     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario, idrol)));
+        // }
+        
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(idUsuario, idrol)));
+        
+
       }else{
         espera(context, false);
         showDialog(

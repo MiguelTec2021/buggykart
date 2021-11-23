@@ -13,15 +13,17 @@ String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 
 class NewsPage extends StatefulWidget {
-  const NewsPage(int idUsuario, {Key? key}) : super(key: key);
+  const NewsPage(int idUsuario, int idrol, {Key? key}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<NewsPage> createState() => _NewsPageState(idUsuario);
 }
 
 class _NewsPageState extends State<NewsPage> {
 
   bool loading = true;
+  int rol = 1;
 
   List<Data_news> data = <Data_news>[];
 
@@ -58,14 +60,10 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Noticias'),),
-      drawer: const Drawer(),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> AddNew(idUsuario),fullscreenDialog: true), );
-        },
-      ),
+      floatingActionButton: idrol == 1 ? FloatingActionButton( child: const Icon(Icons.add),
+        onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=> AddNew(idUsuario),fullscreenDialog: true),);},
+      ): null
+      ,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +87,7 @@ class _NewsPageState extends State<NewsPage> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
                               SizedBox(
                                 width: 30,
                                 height: 30,
@@ -99,8 +97,8 @@ class _NewsPageState extends State<NewsPage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 5.0),
-                                  Text(data[index].nombreU, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
+                                  const SizedBox(height: 5.0),
+                                  Text(data[index].nombreU, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),
                                   Text(data[index].titulo, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.white)),
                                 ],
                               ),
@@ -111,7 +109,7 @@ class _NewsPageState extends State<NewsPage> {
                           // color: Colors.black,
                           decoration: BoxDecoration(
                             color: Colors.grey[400],
-                            border: Border(
+                            border: const Border(
                               bottom: BorderSide(
                                 // color: Colors.grey,
                                 width: 1,
@@ -130,7 +128,7 @@ class _NewsPageState extends State<NewsPage> {
                           ),
                         ),
                         ListTile(
-                          title: Text(data[index].contenido, style: TextStyle(fontSize: 14),),
+                          title: Text(data[index].contenido, style: const TextStyle(fontSize: 14),),
                           // subtitle: Text(data[index].contenido),
                           tileColor: Colors.grey[300],
                         ),

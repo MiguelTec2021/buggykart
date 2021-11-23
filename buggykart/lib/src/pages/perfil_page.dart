@@ -91,8 +91,8 @@ class _PerfilState extends State<Perfil> {
     );
   }
   Widget _fotodeperfil(fotou){
-    final foto = Container(
-      // height: 100,
+    final foto = SizedBox(
+      height: 100,
       child: Column(
         children: [
           FadeInImage(

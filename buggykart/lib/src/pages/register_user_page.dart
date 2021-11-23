@@ -39,7 +39,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
 
   Future selImage(op)async{
 
-    var pickerFile;
+    XFile? pickerFile;
     if(op == 1){
       // ignore: deprecated_member_use
       pickerFile = await picker.pickImage(source: ImageSource.camera);
@@ -62,7 +62,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
   }
   Dio dio = Dio();
 
-  Future<void> subir_imagen()async{
+  Future<void> subirimagen()async{
     try {
       String filename = imagen!.path.split('/').last;
 
@@ -73,6 +73,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
           imagen!.path, filename: filename
         )
       }); 
+      // ignore: unused_local_variable
       String imagens;
 
       var response = await dio.post('${serve2}subir.php',
@@ -80,10 +81,12 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
 
       foto = response.toString();
 
+      // ignore: avoid_print
       print('nombre de la foto: '+ foto);
 
 
     } catch (e) {
+      // ignore: avoid_print
       print(e.toString());
     }
   }
@@ -139,15 +142,15 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                       selImage(1);
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
+                                      padding: const EdgeInsets.all(20),
+                                      decoration: const BoxDecoration(
                                         border: Border(bottom:  BorderSide(
                                           width: 1,
                                           color: Colors.grey
                                         ))
                                       ),
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Expanded(
                                             child: Text('Tomar una foto', style: TextStyle(fontSize: 16),),
                                           ),
@@ -179,12 +182,12 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                                       Navigator.of(context).pop();
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
+                                      padding: const EdgeInsets.all(20),
+                                      decoration: const BoxDecoration(
                                         color: Colors.red
                                       ),
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Expanded(
                                             child: Text('Cancelar', style: TextStyle(fontSize: 16, color: Colors.white ,), textAlign: TextAlign.center),
                                           ),
@@ -273,7 +276,7 @@ class _RegisterUserPageState extends State<RegisterUserPage> {
                     // ingresar(context,user, pass);
                     registrarUsuario(context, name, foto, lasname, years, user, email, password);
                     // print(foto.toString());
-                    subir_imagen();
+                    subirimagen();
                   }else{
                     showDialog(
                       context: context,
