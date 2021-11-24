@@ -1,5 +1,6 @@
 class DataUser {
   final int userId;
+  final int idrol;
   final String nombre;
   final String apellidos;
   final String edad;
@@ -10,6 +11,7 @@ class DataUser {
 
   DataUser({
     required this.userId,
+    required this.idrol,
     required this.nombre,
     required this.apellidos,
     required this.edad,
@@ -23,6 +25,7 @@ class DataUser {
   factory DataUser.fromJson(Map<String, dynamic> json) {
     return DataUser(
       userId: json['id_usuario'],
+      idrol: json['id_rol'],
       nombre: json['nombre'],
       apellidos: json['apellidos'],
       edad: json['edad'],

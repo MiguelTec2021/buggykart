@@ -1,11 +1,8 @@
 import 'dart:convert';
-
 import 'package:buggykart/src/pages/add_new.dart';
 import 'package:buggykart/src/pages/funciones/login.dart';
-// import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'clases/data_news.dart';
 
 String serve = 'http://192.168.56.1/apps/';

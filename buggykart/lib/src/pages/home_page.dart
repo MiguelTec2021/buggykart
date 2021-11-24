@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       // appBar: AppBar(title: Text(widget.idUsuario.toString()),),
       body: _paginas[_pagina],
       bottomNavigationBar:_navegacionBotton(),
-      drawer: idrol==1 ? const Drawer(): null,
+      // drawer: idrol==1 ? const Drawer(): null,
     );
   }
 
