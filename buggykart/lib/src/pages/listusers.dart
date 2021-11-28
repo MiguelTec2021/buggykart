@@ -3,27 +3,24 @@ import 'package:buggykart/src/pages/clases/data_users.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
-
 class ListUsers extends StatefulWidget {
-  ListUsers({Key? key}) : super(key: key);
+  const ListUsers({Key? key}) : super(key: key);
 
   @override
   _ListUsersState createState() => _ListUsersState();
 }
 
 class _ListUsersState extends State<ListUsers> {
-
   List<DataUsers> data = <DataUsers>[];
 
+  Future<List<DataUsers>> tomarDatos() async {
+    var url = Uri.parse('http://192.168.8.102/api/');
 
-  Future<List<DataUsers>> tomarDatos()async{
-    var url = Uri.parse('${serve2}listUsers.php');
-
-    var response = await http.post(url).timeout(const Duration(seconds: 20));
+    var response = await http.post(url,
+        body: {'method': 'userAll'}).timeout(const Duration(seconds: 20));
 
     var datos = json.decode(response.body);
 
@@ -35,19 +32,17 @@ class _ListUsersState extends State<ListUsers> {
     return registros;
   }
 
-  Future eliminarusuario(int id)async{
+  Future eliminarusuario(int id) async {
     var url = Uri.parse('${serve2}delete.php');
-    var response = await http.post(url, body: {
-      'id': id.toString()
-    }).timeout(const Duration(seconds: 20));
+    var response = await http.post(url,
+        body: {'id': id.toString()}).timeout(const Duration(seconds: 20));
     var datos = json.decode(response.body);
-    print("datos::::"+datos.toString());
+    // ignore: avoid_print
+    print("datos::::" + datos.toString());
     if (datos.toString() == '1') {
-
+      // ignore: avoid_print
       print('eliminado');
-      setState(() {
-        
-      });
+      setState(() {});
     }
   }
 
@@ -68,14 +63,15 @@ class _ListUsersState extends State<ListUsers> {
         title: const Text('Lista de usuarios'),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.person_add_sharp),
-        onPressed: (){},
-        ),
-        
+        child: const Icon(Icons.person_add_sharp),
+        onPressed: () {},
+      ),
       body: Center(
         child: Column(
           children: [
-            const SizedBox(height: 24,),
+            const SizedBox(
+              height: 24,
+            ),
             // Container(
             //   color: Colors.teal,
             //   height: 50,
@@ -92,78 +88,80 @@ class _ListUsersState extends State<ListUsers> {
             // ),
             Expanded(
               child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context, int index){
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 2),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // Container(
-                            //   padding: const EdgeInsets.all(10),
-                            //   color: Colors.grey,
-                            //   height: 40,
-                            //   width: 100,
-                            //   child: Text(data[index].nombre)
-                            //   ),
-                            // Container(
-                            //   padding: const EdgeInsets.all(10),
-                            //   color: Colors.grey,
-                            //   height: 40,
-                            //   width: 100,
-                            //   child: Text(data[index].apellidos)
-                            //   ),
-                            Container(
-                              padding: const EdgeInsets.all(3),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                backgroundImage: NetworkImage('${serve2}fotos/'+data[index].foto),
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // Container(
+                              //   padding: const EdgeInsets.all(10),
+                              //   color: Colors.grey,
+                              //   height: 40,
+                              //   width: 100,
+                              //   child: Text(data[index].nombre)
+                              //   ),
+                              // Container(
+                              //   padding: const EdgeInsets.all(10),
+                              //   color: Colors.grey,
+                              //   height: 40,
+                              //   width: 100,
+                              //   child: Text(data[index].apellidos)
+                              //   ),
+                              Container(
+                                padding: const EdgeInsets.all(3),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: NetworkImage(
+                                      '${serve2}fotos/' + data[index].foto),
+                                ),
                               ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              // color: Colors.grey,
-                              height: 40,
-                              width: 100,
-                              child: Text(data[index].usuario)
+                              Container(
+                                  padding: const EdgeInsets.all(10),
+                                  // color: Colors.grey,
+                                  height: 40,
+                                  width: 100,
+                                  child: Text(data[index].usuario)),
+                              Container(
+                                  padding: const EdgeInsets.all(10),
+                                  // color: Colors.grey,
+                                  height: 40,
+                                  width: 100,
+                                  child: Text(data[index].email)),
+                              // const SizedBox(width: 20,),
+                              // Text(data[index].apellidos),
+                              // const SizedBox(width: 20,),
+                              // Text(data[index].usuario),
+                              // const SizedBox(width: 20,),
+                              // Text(data[index].email),
+                              // const SizedBox(width: 20,),
+                              InkWell(
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                onTap: () {
+                                  // ignore: avoid_print
+                                  print(data[index].idusuario);
+                                  eliminarusuario(data[index].idusuario);
+                                },
                               ),
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              // color: Colors.grey,
-                              height: 40,
-                              width: 100,
-                              child: Text(data[index].email)
-                              ),
-                            // const SizedBox(width: 20,),
-                            // Text(data[index].apellidos),
-                            // const SizedBox(width: 20,),
-                            // Text(data[index].usuario),
-                            // const SizedBox(width: 20,),
-                            // Text(data[index].email),
-                            // const SizedBox(width: 20,),
-                            InkWell(
-                              child: const Icon(Icons.delete, color: Colors.red,),
-                              onTap: (){
-                                print(data[index].idusuario);
-                                eliminarusuario(data[index].idusuario);
-                              },
-                            ),
-                            InkWell(
-                              child: const Icon(Icons.edit, color: Colors.red,),
-                              onTap: (){},
-                            )
-            
-            
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                }
-                
-              ),
+                              InkWell(
+                                child: const Icon(
+                                  Icons.edit,
+                                  color: Colors.red,
+                                ),
+                                onTap: () {},
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  }),
             ),
           ],
         ),

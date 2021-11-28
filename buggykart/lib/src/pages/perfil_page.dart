@@ -4,16 +4,13 @@ import 'package:buggykart/src/pages/funciones/login.dart';
 import 'package:buggykart/src/pages/listusers.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
 String serve = 'http://192.168.56.1/apps/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
-
 Future<DataUser> fetchAlbum(id) async {
   var url = Uri.parse('${serve2}user/datos.php');
-  final response = await http
-      .post(url, body: {
-        'index' : id.toString()
-      });
+  final response = await http.post(url, body: {'index': id.toString()});
 
   if (response.statusCode == 200) {
     var datos = jsonDecode(response.body);
@@ -48,7 +45,7 @@ class _PerfilState extends State<Perfil> {
       body: Center(
         child: FutureBuilder<DataUser>(
           future: user,
-          builder: (context, snapshot){
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(
                 children: [
@@ -57,7 +54,7 @@ class _PerfilState extends State<Perfil> {
                     children: [
                       Column(
                         children: const [
-                            FadeInImage(
+                          FadeInImage(
                             placeholder: AssetImage('assets/load.gif'),
                             image: AssetImage('assets/back.jpeg'),
                             height: 200,
@@ -70,14 +67,32 @@ class _PerfilState extends State<Perfil> {
                       ),
                       Row(
                         children: [
-                          const SizedBox(width: 10,),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           _fotodeperfil(snapshot.data!.foto),
-                          const SizedBox(width: 20,),
+                          const SizedBox(
+                            width: 20,
+                          ),
                           Column(
                             children: [
-                              Text("Usuario: "+snapshot.data!.usuario, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
-                              const SizedBox(width: 100,),
-                              Text(snapshot.data!.nombreRol, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),),
+                              Text(
+                                "Usuario: " + snapshot.data!.usuario,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Text(
+                                snapshot.data!.nombreRol,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
                             ],
                           ),
                         ],
@@ -88,54 +103,52 @@ class _PerfilState extends State<Perfil> {
                     color: Colors.teal,
                     height: 420,
                     alignment: Alignment.center,
-                    
-                    child: snapshot.data!.idrol==1 ?  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Lista de usuarios'),
-                          onPressed: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ListUsers(),fullscreenDialog: true),);
-                          },
-                        ),
-                        const SizedBox(height: 40,),
-                        ElevatedButton(
-                          child: const Text('Lista de mensajes'),
-                          onPressed: (){
-
-                          }
-                        ),
-                        const SizedBox(height: 40,),
-                        ElevatedButton(
-                          child: const Text('Lista de noticias'),
-                          onPressed: (){
-
-                          }
-                        ),
-                      ],
-                    ): Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Editar perfil'),
-                          onPressed: (){
-
-                          },
-                        ),
-                        
-                        ElevatedButton(
-                          child: const Text('Cambiar contraseña'),
-                          onPressed: (){
-
-                          },
-                        ),
-                      ],
-                    ),
+                    child: snapshot.data!.idrol == 1
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                child: const Text('Lista de usuarios'),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => const ListUsers(),
+                                        fullscreenDialog: true),
+                                  );
+                                },
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              ElevatedButton(
+                                  child: const Text('Lista de mensajes'),
+                                  onPressed: () {}),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              ElevatedButton(
+                                  child: const Text('Lista de noticias'),
+                                  onPressed: () {}),
+                            ],
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                child: const Text('Editar perfil'),
+                                onPressed: () {},
+                              ),
+                              ElevatedButton(
+                                child: const Text('Cambiar contraseña'),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
                   )
-                    // SizedBox(height: 10.0,)
+                  // SizedBox(height: 10.0,)
                 ],
               );
-            }else if(snapshot.hasError){
+            } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
             return const CircularProgressIndicator();
@@ -144,7 +157,8 @@ class _PerfilState extends State<Perfil> {
       ),
     );
   }
-  Widget _fotodeperfil(fotou){
+
+  Widget _fotodeperfil(fotou) {
     final foto = Container(
       alignment: Alignment.center,
       color: Colors.white,
@@ -156,16 +170,14 @@ class _PerfilState extends State<Perfil> {
           FadeInImage(
             alignment: Alignment.center,
             placeholder: const AssetImage('assets/load.gif'),
-            image: NetworkImage('${serve2}fotos/'+fotou),
+            image: NetworkImage('${serve2}fotos/' + fotou),
             // image: const AssetImage('assets/load.gif'),
-            fadeInDuration: const  Duration(milliseconds: 200),
+            fadeInDuration: const Duration(milliseconds: 200),
             height: 100,
             fit: BoxFit.cover,
           ),
           // Image(image: NetworkImage('http://192.168.56.1/apps/fotos/eri.jpg'))
-          
         ],
-        
       ),
     );
 
