@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 String serve = 'http://192.168.8.102/apps/';
-String serve1 = 'http://192.168.8.102/api';
+String serve1 = 'http://192.168.8.102/api/';
 String serve2 = 'https://proyecttjyw.000webhostapp.com/';
 
 int index = 0;
@@ -16,7 +16,7 @@ int idrol = 0;
 void ingresar(context, useri, passi) async {
   try {
     espera(context, true);
-    var url = Uri.parse('http://192.168.8.102/api/');
+    var url = Uri.parse(serve1);
     var response = await http.post(url, body: {
       'method': 'login',
       'usuario': useri,
